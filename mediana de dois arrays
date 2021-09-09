@@ -1,0 +1,77 @@
+# cook your dish here
+
+#calcula mediana de um vetor ordenado
+def mediana(vet):
+    if len(vet)%2 == 0:
+        meio = int((len(vet)) / 2)
+        return (vet[meio-1] + vet [meio])/2
+    else:
+        meio = int((len(vet) + 1) / 2)
+        return vet[meio-1]
+
+#calcula mediana de dois vetores ordenados
+def mediana2vetores(vet1, vet2):
+    sub1 = []
+    sub2 = []
+
+    if(len(vet1) == 1):
+        return (vet1[0] + vet2[0])/2
+
+    if(mediana(vet1) == mediana(vet2)):
+        return mediana(vet1)
+    else:
+        if(len(vet1) % 2 == 0):
+            meio = int(len(vet1) / 2)
+            for i in range(meio):
+                sub2.append(vet2[i])
+                sub1.append((vet1[i+meio]))
+        else:
+            meio = int((len(vet1)+1) / 2)
+            for i in range(meio):
+                sub2.append(vet2[i])
+                sub1.append((vet1[i+meio-1]))
+
+        return mediana2vetores(sub1, sub2)
+
+#teste
+
+tam = int(input())
+vet1 = []
+vet2 = []
+vet12 = []
+
+vet1 = input().split()
+vet2 = input().split()
+for i in range(tam):
+    vet1[i] = int(vet1[i])
+    vet2[i] = int(vet2[i])
+
+
+print(mediana2vetores(vet1, vet2))
+
+
+
+
+# testes
+# 55
+# 2 3 6 7 9
+# 1 2 6 10 11
+
+#5
+#0 1 2 4 5
+#7 9 10 12 13
+
+# 30
+# 01 04 05 09 12 13 18 27 32 45 51 52 56 59 64 | 66 72 79 81 86  89  95  99 105 106 112 114 115 121 125
+# 12 14 17 23 25 29 32 33 39 42 43 44 52 53 78 | 84 94 97 98 99 102 105 106 113 119 126 128 132 133 141
+
+# 10
+# 0 1 2 3 4 5 6 7 8 9
+# 10 11 12 13 14 15 16 17 18 19
+
+# 1 2 5 7 11 21 25 32
+# 8 9 10 11 15 20 21 32
+
+
+
+
